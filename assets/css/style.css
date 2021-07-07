@@ -12,6 +12,8 @@ nav {
   margin: 20px 20px 150px;
 }
 
+/* View High Scores Link */
+
 h2 {
   color: #b244e3;
   font-size: 25px;
@@ -24,11 +26,28 @@ h2 {
   font-size: 25px;
 }
 
-.start-page {
-  display: flex;
-  flex-direction: column;
+/* Global button */
+
+.btn {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  text-align: center;
+  background-color: #351c75;
+  padding: 10px 30px;
+  border-radius: 10px;
   align-items: center;
+  border: none;
 }
+
+.btn:hover,
+.options ul li:hover {
+  background-color: #bd60e7;
+  cursor: pointer;
+}
+
+/* Main section */
 
 main {
   margin: 50px 300px 0 500px;
@@ -36,6 +55,7 @@ main {
   align-items: center;
 }
 
+/* Controls title of get started, questions, all done, and high scores screens */
 h3 {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
@@ -45,10 +65,7 @@ h3 {
   text-align: center;
 }
 
-.options h3 {
-  text-align: left;
-}
-
+/* Controls subheadings of title, all done and high scores screens */
 .sub-heading {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
@@ -58,27 +75,35 @@ h3 {
   text-align: center;
 }
 
-.hero-btn,
-.primary-btn {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  max-width: 400px;
-  font-weight: 100;
-  font-size: 30px;
-  text-align: center;
-  background-color: #351c75;
-  padding: 20px 30px;
-  margin: 10px;
-  border-radius: 15px;
+/* Start Page Screen */
+
+.start-page {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-ul {
+.start-page .btn {
+  max-width: 400px;
+  align-items: center;
+  padding: 20px 50px;
+  margin: 10px;
+  font-size: 30px;
+  border-radius: 15px;
+}
+
+/* Multiple choice options */
+
+.options h3 {
+  text-align: left;
+}
+
+.options ul {
   display: flex;
   flex-direction: column;
 }
 
-ul li {
+.options ul li {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   max-width: 400px;
@@ -86,18 +111,12 @@ ul li {
   font-size: 24px;
   background-color: #351c75;
   padding: 20px 30px;
-  margin: 15px 0;
+  margin: 10px 0;
   border-radius: 15px;
   flex-wrap: nowrap;
 }
 
-.hero-btn:hover,
-.primary-btn:hover,
-ul li:hover,
-.submit-btn:hover {
-  background-color: #bd60e7;
-  cursor: pointer;
-}
+/* Correct or wrong  */
 
 .correct-wrong {
   font-size: 30px;
@@ -136,16 +155,38 @@ ul li:hover,
   padding: 7px 0 7px 15px;
 }
 
-.submit-btn {
-  color: white;
+.submit-score .btn {
   display: inline;
+}
+
+/* High scores screen */
+
+.high-scores {
+  display: flex;
+  flex-direction: column;
+}
+
+.high-scores h3,
+.high-scores p {
+  text-align: left;
+}
+
+.hs-btn-container {
+  width: 800px;
+}
+
+.high-scores li {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
-  font-size: 30px;
-  text-align: center;
-  background-color: #351c75;
-  padding: 10px 30px;
-  border-radius: 15px;
-  align-items: center;
-  border: none;
+  font-size: 24px;
+  background-color: #d9d3e9;
+  padding: 15px 30px;
+  margin: 15px 0;
+  flex-wrap: nowrap;
+  list-style-type: none;
+}
+
+.high-scores .btn {
+  margin: 20px 15px 0 0;
+  display: inline-block;
 }

@@ -14,14 +14,14 @@ nav {
 
 h2 {
   color: #b244e3;
-  font-size: 20px;
+  font-size: 25px;
   font-family: sans-serif;
   font-weight: 100;
 }
 
 .timer {
   margin-right: 30px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .start-page {
@@ -31,18 +31,22 @@ h2 {
 }
 
 main {
-  margin: 50px 400px;
+  margin: 50px 300px 0 500px;
   display: flex;
   align-items: center;
 }
 
-.main-heading {
+h3 {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-size: 60px;
   font-weight: 600;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.options h3 {
+  text-align: left;
 }
 
 .sub-heading {
@@ -63,13 +67,13 @@ main {
   font-size: 30px;
   text-align: center;
   background-color: #351c75;
-  padding: 20px 40px;
+  padding: 20px 30px;
   margin: 10px;
   border-radius: 15px;
   align-items: center;
 }
 
-ol {
+ul {
   display: flex;
   flex-direction: column;
 }
@@ -77,26 +81,28 @@ ol {
 ul li {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 280px;
+  max-width: 400px;
   font-weight: 100;
-  font-size: 18px;
+  font-size: 24px;
   background-color: #351c75;
-  padding: 15px;
-  margin: 10px;
+  padding: 20px 30px;
+  margin: 15px 0;
   border-radius: 15px;
+  flex-wrap: nowrap;
 }
 
 .hero-btn:hover,
 .primary-btn:hover,
-ul li:hover {
+ul li:hover,
+.submit-btn:hover {
   background-color: #bd60e7;
   cursor: pointer;
 }
 
 .correct-wrong {
-  font-size: 25px;
+  font-size: 30px;
   letter-spacing: 0.1rem;
-  font-weight: 200;
+  font-weight: 300;
   font-style: italic;
   color: #9e9e9e;
   margin-top: 30px;
@@ -106,4 +112,40 @@ ul li:hover {
   border-color: #9e9e9e;
   padding-top: 10px;
   padding-left: 10px;
+}
+
+/* Submit Score Screen */
+
+.submit-score {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-score h3,
+.submit-score p {
+  text-align: left;
+}
+
+.submit-score label,
+.submit-score input {
+  font-size: 30px;
+  text-align: left;
+  margin-right: 30px;
+}
+.submit-score input {
+  padding: 7px 0 7px 15px;
+}
+
+.submit-btn {
+  color: white;
+  display: inline;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 30px;
+  text-align: center;
+  background-color: #351c75;
+  padding: 10px 30px;
+  border-radius: 15px;
+  align-items: center;
+  border: none;
 }

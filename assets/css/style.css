@@ -35,7 +35,7 @@ h2 {
   font-size: 24px;
   text-align: center;
   background-color: #351c75;
-  padding: 10px 30px;
+  padding: 10px 25px;
   border-radius: 10px;
   align-items: center;
   border: none;
@@ -50,9 +50,8 @@ h2 {
 /* Main section */
 
 main {
-  margin: 50px 300px 0 500px;
-  display: flex;
-  align-items: center;
+  margin: auto;
+  width: 60%;
 }
 
 /* Controls title of get started, questions, all done, and high scores screens */
@@ -69,7 +68,7 @@ h3 {
 .sub-heading {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
-  font-size: 35px;
+  font-size: 33px;
   font-weight: 300;
   margin-bottom: 20px;
   text-align: center;
@@ -98,22 +97,23 @@ h3 {
   text-align: left;
 }
 
-.options ul {
+.options .option-buttons {
   display: flex;
   flex-direction: column;
 }
 
-.options ul li {
+.option-buttons .option {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  min-width: 300px;
   max-width: 400px;
   font-weight: 100;
+  text-align: left;
   font-size: 24px;
   background-color: #351c75;
   padding: 20px 30px;
   margin: 10px 0;
   border-radius: 15px;
-  flex-wrap: nowrap;
 }
 
 /* Correct or wrong  */

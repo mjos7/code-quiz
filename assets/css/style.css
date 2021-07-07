@@ -9,26 +9,64 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 20px;
+  margin: 20px 20px 150px;
 }
 
 h2 {
   color: #b244e3;
-  font-size: 16px;
+  font-size: 20px;
   font-family: sans-serif;
   font-weight: 100;
 }
 
 .timer {
   margin-right: 30px;
+  font-size: 20px;
 }
 
-.instructions {
+.start-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  margin: 50px 400px;
+  display: flex;
+  align-items: center;
+}
+
+.main-heading {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  font-size: 60px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sub-heading {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-size: 35px;
-  font-weight: 600;
+  font-weight: 300;
   margin-bottom: 20px;
+  text-align: center;
+}
+
+.hero-btn,
+.primary-btn {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 400px;
+  font-weight: 100;
+  font-size: 30px;
+  text-align: center;
+  background-color: #351c75;
+  padding: 20px 40px;
+  margin: 10px;
+  border-radius: 15px;
+  align-items: center;
 }
 
 ol {
@@ -45,13 +83,14 @@ ul li {
   background-color: #351c75;
   padding: 15px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
-main {
-  width: 50%;
-  margin-top: 50px;
-  margin-left: 300px;
+.hero-btn:hover,
+.primary-btn:hover,
+ul li:hover {
+  background-color: #bd60e7;
+  cursor: pointer;
 }
 
 .correct-wrong {

@@ -88,7 +88,7 @@ const nextQuestion = function () {
   // store score in highScore array
 };
 
-const userSelectsChoice = function () {
+const quiz = function () {
   // user selects an option
   // show correct or wrong
   // show next question

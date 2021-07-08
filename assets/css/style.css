@@ -47,6 +47,10 @@ h2 {
   cursor: pointer;
 }
 
+.hide {
+  display: none;
+}
+
 /* Main section */
 
 main {
@@ -133,29 +137,29 @@ h3 {
   padding-left: 10px;
 }
 
-/* Submit Score Screen */
+/* Quiz Complete Screen */
 
-.submit-score {
+.quiz-complete {
   display: flex;
   flex-direction: column;
 }
 
-.submit-score h3,
-.submit-score p {
+.quiz-complete h3,
+.quiz-complete p {
   text-align: left;
 }
 
-.submit-score label,
-.submit-score input {
+.quiz-complete label,
+.quiz-complete input {
   font-size: 30px;
   text-align: left;
   margin-right: 30px;
 }
-.submit-score input {
+.quiz-complete input {
   padding: 7px 0 7px 15px;
 }
 
-.submit-score .btn {
+.quiz-complete .btn {
   display: inline;
 }
 

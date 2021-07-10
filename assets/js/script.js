@@ -4,10 +4,12 @@ var startPage = document.querySelector('.start-page');
 var startBtnEl = document.getElementById('start-btn');
 var timerEl = document.getElementById('time');
 var h3StartPageEl = document.getElementById('quiz-title');
+var optionsEl = document.getElementById('options');
+var optionsButtonsEl = document.getElementById('option-btns');
 
 // const shuffledQuestions, currentQuestionIndex
 
-// Var with array and object for questions
+// Questions array with objects for each question
 var questions = [
   {
     q: 'Commonly used data types DO NOT include:',
@@ -39,12 +41,17 @@ var questions = [
 const startGame = function () {
   // hide start page div
   hideSection(startPage);
+  showSection(optionsEl); // MAYBE MOVE THIS TO NEXT QUESTION FUNCTION....
+  timer();
+  showQuestion();
+  showOption();
+};
 
-  // start timer
-  var timer = setInterval(function () {
+// start timer
+function timer() {
+  setInterval(function () {
     if (time > 1) {
       document.getElementById('time').innerHTML = time;
-      nextQuestion();
     } else {
       clearInterval(timer);
       document.getElementById('time').innerHTML = 'Complete';
@@ -52,41 +59,45 @@ const startGame = function () {
     }
     time--;
   }, 1000);
-
-  // call nextQuestion function
-  nextQuestion();
-};
+}
 
 // Hide main section by class
 var hideSection = function (sectionClass) {
   sectionClass.className = 'hide';
 };
 
-const nextQuestion = function () {
-  // check how many questions remaining in object.
-  // If questions remaining, show question 1 div
-  // create question h3
-  //FOR LOOP TO BE EDITED!
-  for (var i = 0; i < questions.length; i++) {
-    var displayOption = document.createElement('li');
-    editButtonEl.textContent = 'Edit';
-    editButtonEl.className = 'btn edit-btn';
-    editButtonEl.setAttribute('data-task-id', taskId);
-    actionContainerEl.appendChild(editButtonEl);
-
-    document.innerHTML(questions[i].q);
-    if (a === q) {
-      score += 5;
-    } else {
-      window.alert('answer correct');
-    }
-  }
-  // create options 1-4
-  // replace question h3
-  // replace options 1-4
-  // else go to 'quizComplete' screen
-  // store score in highScore array
+// Show main section by class
+var showSection = function (sectionClass) {
+  sectionClass.classList.remove('hide');
 };
+
+var showQuestion = function () {
+  //loop through questions array
+  //FOR LOOP TO BE EDITED!
+  for (var i = 0; i <= questions.length; i++) {
+    var showQuesEl = document.createElement('h3');
+    showQuesEl.innerHTML = questions[i].q;
+    optionsEl.appendChild(showQuesEl);
+
+    // var showOption = function () {
+    for (let i = 0; i < questions[i].c.length; i++) {
+      console.log('hi');
+      var showOptionEl = document.createElement('button');
+      showOptionEl.className = 'option';
+      showOptionEl.innerHTML = questions[i].c;
+    }
+    // };
+  }
+};
+
+// console.log(displayQuestion);
+// optionsEl.displayQuestion.textContent = questions[i].q;
+
+// create options 1-4
+// replace question h3
+// replace options 1-4
+// else go to 'quizComplete' screen
+// store score in highScore array
 
 const quiz = function () {
   // user selects an option
@@ -116,3 +127,15 @@ const highScores = function () {
 startBtnEl.addEventListener('click', function () {
   startGame();
 });
+
+// displayOption.textContent = 'document.innerHTML(questions[i].q);';
+// displayOption.className = 'option';
+// displayOption.setAttribute('data-task-id', taskId);
+// optionsButtonsEl.appendChild(editButtonEl);
+
+// //   if (a === q) {
+// //     score += 5;
+// //   } else {
+// //     window.alert('answer correct');
+// //   }
+// // }

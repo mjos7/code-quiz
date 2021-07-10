@@ -14,11 +14,12 @@ nav {
 
 /* View High Scores Link */
 
-h2 {
+nav a {
   color: #b244e3;
   font-size: 25px;
   font-family: sans-serif;
   font-weight: 100;
+  text-decoration: none;
 }
 
 .timer {
@@ -41,8 +42,7 @@ h2 {
   border: none;
 }
 
-.btn:hover,
-.options ul li:hover {
+.btn:hover {
   background-color: #bd60e7;
   cursor: pointer;
 }

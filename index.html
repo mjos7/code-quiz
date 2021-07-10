@@ -35,7 +35,7 @@
       <!-- Game in Progress screen-->
       <div class="options hide" id="options">
         <h3 id="question-header"></h3>
-        <div class="option-buttons" id="option-btns">
+        <div class="option-btns" id="option-btns">
           <button id="btn-1" class="option btn">
           </button>
           <button id="btn-2" class="option btn">
@@ -45,7 +45,7 @@
           <button id="btn-4" class="option btn">
           </button>
         </div>
-        <!-- <div class="correct-wrong"></div> -->
+        <div id="correct-wrong" class="correct-wrong hide"></div>
       </div>
       <!-- Quiz Complete screen-->
       <div class="hide quiz-complete" id="quiz-complete">
@@ -56,8 +56,9 @@
         <form id="form-section" action="submit">
           <label for="initials">Enter Initials:</label>
           <input type="text" name="initials" maxlength="4" id="initials" />
-          <button class="btn">Submit</button>
+          <button id="submit-score-btn" class="btn" onclick="window.location.href='./high-scores.html'">Submit</button>
         </form>
+        <div id="correct-wrong-2" class="correct-wrong hide"></div>
       </div>
     </main>
   </body>

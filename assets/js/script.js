@@ -1,7 +1,9 @@
+// Global Variables
 var score = 0;
 var time = 120;
 var count = 0;
 
+// DOM Elements
 var startPage = document.querySelector('.start-page');
 var startBtnEl = document.getElementById('start-btn');
 var timerEl = document.getElementById('time');
@@ -13,13 +15,13 @@ var btn1El = document.getElementById('btn-1');
 var btn2El = document.getElementById('btn-2');
 var btn3El = document.getElementById('btn-3');
 var btn4El = document.getElementById('btn-4');
+var correctWrongEl = document.getElementById('correct-wrong');
 var quizCompleteEl = document.getElementById('quiz-complete');
 var highScoreEl = document.getElementById('high-score');
 var initialsEl = document.getElementById('initials');
+var submitScoreEl = document.getElementById('submit-score-btn');
 
-// const shuffledQuestions, currentQuestionIndex
-
-// Questions array with objects for each question
+// Quiz Questions, Choices and Answers
 var questions = [
   {
     q: 'Commonly used data types DO NOT include:',
@@ -27,7 +29,7 @@ var questions = [
     a: 'alerts',
   },
   {
-    q: 'The condition in an if / else statement is enclosed within ____.',
+    q: 'The condition in an if / else statement is enclosed within ________.',
     c: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
     a: 'parentheses',
   },
@@ -37,7 +39,7 @@ var questions = [
     a: 'all of the above',
   },
   {
-    q: 'String values must be enclosed within ____ when being assigned to variables.',
+    q: 'String values must be enclosed within ________ when being assigned to variables.',
     c: ['commas', 'curly brackets', 'quotes', 'parenthesis'],
     a: 'quotes',
   },
@@ -48,16 +50,33 @@ var questions = [
   },
 ];
 
+// Stores high scores
+var scores = {
+  initials: [],
+  highScore: [],
+};
+
+// Function that starts game (triggered by 'Start Quiz' button)
+
 const startGame = function () {
   // hide start page div
   hideSection(startPage);
-  showSection(optionsEl); // MAYBE MOVE THIS TO NEXT QUESTION FUNCTION....
+  showSection(optionsEl);
   timer();
   questionIndex(count);
-  // showOption();
 };
 
-// start timer
+// Hide section by class
+var hideSection = function (sectionClass) {
+  sectionClass.className = 'hide';
+};
+
+// Show section by class
+var showSection = function (sectionClass) {
+  sectionClass.classList.remove('hide');
+};
+
+// Start timer
 function timer() {
   setInterval(function () {
     if (time > 1) {
@@ -71,16 +90,7 @@ function timer() {
   }, 1000);
 }
 
-// Hide main section by class
-var hideSection = function (sectionClass) {
-  sectionClass.className = 'hide';
-};
-
-// Show main section by class
-var showSection = function (sectionClass) {
-  sectionClass.classList.remove('hide');
-};
-
+// Keeps track of current question within array
 var questionIndex = function (count) {
   if (count < questions.length) {
     showQuestion(count);
@@ -89,56 +99,61 @@ var questionIndex = function (count) {
   }
 };
 
-var showQuestion = function (count) {
-  //loop through questions array
+// Shows question within array, based on question index function
 
+var showQuestion = function (count) {
   questionHeaderEl.textContent = questions[count].q;
-  btn1El.textContent = `1. ${questions[count].c[0]}`;
-  btn2El.textContent = `2. ${questions[count].c[1]}`;
-  btn3El.textContent = `3. ${questions[count].c[2]}`;
-  btn4El.textContent = `4. ${questions[count].c[3]}`;
-  // };
+  btn1El.textContent = questions[count].c[0];
+  btn2El.textContent = questions[count].c[1];
+  btn3El.textContent = questions[count].c[2];
+  btn4El.textContent = questions[count].c[3];
 };
+
+// Checks if the answer is correct / wrong
 
 const checkAnswer = function (btnText) {
   if (count < questions.length) {
     if (btnText === questions[count].a) {
-      score++;
       count++;
+      score += 20;
       questionIndex(count);
+      showSection(correctWrongEl);
+      correctWrongEl.textContent = 'Correct';
     } else {
-      time -= 10;
       count++;
+      time -= 10;
       questionIndex(count);
+      showSection(correctWrongEl);
+      correctWrongEl.textContent = 'Wrong';
     }
   }
 };
 
 const quizComplete = function () {
-  console.log(quizCompleteEl);
   showSection(quizCompleteEl);
   hideSection(optionsEl);
+  showSection(correctWrongEl);
   highScoreEl.textContent = score;
-  // show quizComplete div
-  // replace p with final score
-  // show form
+
   // store form submission in variable
   // store info in local storage
   // go to high scores screen
 };
 
 const highScores = function () {
+  scores.highScore.push(score);
+  scores.initials.push(initialsEl.value);
   // show highScores div with buttons
   // if Replay button pressed, call startGame function
   // if clear high scores button pressed, clear high scores
 };
 
 // when start button is clicked
-
 startBtnEl.addEventListener('click', function () {
   startGame();
 });
 
+// When choice is selected by pressing button
 btn1El.addEventListener('click', function () {
   checkAnswer(btn1El.textContent);
 });
@@ -155,18 +170,10 @@ btn4El.addEventListener('click', function () {
   checkAnswer(btn4El.textContent);
 });
 
-btn4El.addEventListener('click', function () {
-  checkAnswer(btn4El.textContent);
+submitScoreEl.addEventListener('click', function () {
+  event.preventDefault();
+  highScores();
 });
 
-// displayOption.textContent = 'document.innerHTML(questions[i].q);';
-// displayOption.className = 'option';
 // displayOption.setAttribute('data-task-id', taskId);
 // optionsButtonsEl.appendChild(editButtonEl);
-
-// //   if (a === q) {
-// //     score += 5;
-// //   } else {
-// //     window.alert('answer correct');
-// //   }
-// // }

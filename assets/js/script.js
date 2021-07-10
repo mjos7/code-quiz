@@ -1,4 +1,6 @@
+var score = 0;
 var time = 120;
+var count = 0;
 
 var startPage = document.querySelector('.start-page');
 var startBtnEl = document.getElementById('start-btn');
@@ -6,6 +8,14 @@ var timerEl = document.getElementById('time');
 var h3StartPageEl = document.getElementById('quiz-title');
 var optionsEl = document.getElementById('options');
 var optionsButtonsEl = document.getElementById('option-btns');
+var questionHeaderEl = document.getElementById('question-header');
+var btn1El = document.getElementById('btn-1');
+var btn2El = document.getElementById('btn-2');
+var btn3El = document.getElementById('btn-3');
+var btn4El = document.getElementById('btn-4');
+var quizCompleteEl = document.getElementById('quiz-complete');
+var highScoreEl = document.getElementById('high-score');
+var initialsEl = document.getElementById('initials');
 
 // const shuffledQuestions, currentQuestionIndex
 
@@ -43,8 +53,8 @@ const startGame = function () {
   hideSection(startPage);
   showSection(optionsEl); // MAYBE MOVE THIS TO NEXT QUESTION FUNCTION....
   timer();
-  showQuestion();
-  showOption();
+  questionIndex(count);
+  // showOption();
 };
 
 // start timer
@@ -71,43 +81,44 @@ var showSection = function (sectionClass) {
   sectionClass.classList.remove('hide');
 };
 
-var showQuestion = function () {
-  //loop through questions array
-  //FOR LOOP TO BE EDITED!
-  for (var i = 0; i <= questions.length; i++) {
-    var showQuesEl = document.createElement('h3');
-    showQuesEl.innerHTML = questions[i].q;
-    optionsEl.appendChild(showQuesEl);
-
-    // var showOption = function () {
-    for (let i = 0; i < questions[i].c.length; i++) {
-      console.log('hi');
-      var showOptionEl = document.createElement('button');
-      showOptionEl.className = 'option';
-      showOptionEl.innerHTML = questions[i].c;
-    }
-    // };
+var questionIndex = function (count) {
+  if (count < questions.length) {
+    showQuestion(count);
+  } else {
+    quizComplete();
   }
 };
 
-// console.log(displayQuestion);
-// optionsEl.displayQuestion.textContent = questions[i].q;
+var showQuestion = function (count) {
+  //loop through questions array
 
-// create options 1-4
-// replace question h3
-// replace options 1-4
-// else go to 'quizComplete' screen
-// store score in highScore array
+  questionHeaderEl.textContent = questions[count].q;
+  btn1El.textContent = `1. ${questions[count].c[0]}`;
+  btn2El.textContent = `2. ${questions[count].c[1]}`;
+  btn3El.textContent = `3. ${questions[count].c[2]}`;
+  btn4El.textContent = `4. ${questions[count].c[3]}`;
+  // };
+};
 
-const quiz = function () {
-  // user selects an option
-  // show correct or wrong
-  // show next question
-  // if question answered right, add 2 points to score variable
-  // else subtract 10 seconds from time
+const checkAnswer = function (btnText) {
+  if (count < questions.length) {
+    if (btnText === questions[count].a) {
+      score++;
+      count++;
+      questionIndex(count);
+    } else {
+      time -= 10;
+      count++;
+      questionIndex(count);
+    }
+  }
 };
 
 const quizComplete = function () {
+  console.log(quizCompleteEl);
+  showSection(quizCompleteEl);
+  hideSection(optionsEl);
+  highScoreEl.textContent = score;
   // show quizComplete div
   // replace p with final score
   // show form
@@ -126,6 +137,26 @@ const highScores = function () {
 
 startBtnEl.addEventListener('click', function () {
   startGame();
+});
+
+btn1El.addEventListener('click', function () {
+  checkAnswer(btn1El.textContent);
+});
+
+btn2El.addEventListener('click', function () {
+  checkAnswer(btn2El.textContent);
+});
+
+btn3El.addEventListener('click', function () {
+  checkAnswer(btn3El.textContent);
+});
+
+btn4El.addEventListener('click', function () {
+  checkAnswer(btn4El.textContent);
+});
+
+btn4El.addEventListener('click', function () {
+  checkAnswer(btn4El.textContent);
 });
 
 // displayOption.textContent = 'document.innerHTML(questions[i].q);';

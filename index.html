@@ -10,13 +10,14 @@
       content="A coding quiz to test out your developer skills."
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/c663089620.js" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js" defer></script>
   </head>
   <body>
+    <div class="container"></div>
     <header>
-      <a href=""></a>
       <nav>
-        <a href="./high-scores.html"">View High Scores</a>
+        <a href="./high-scores.html"">View High Scores<i class="fas fa-crown"></i> </a>
         <div class="timer">Time: <span id="time">--</span></div>
       </nav>
     </header>
@@ -32,28 +33,32 @@
         <button class="btn" id="start-btn">Start Quiz</button>
       </div>
       <!-- Game in Progress screen-->
-      <div class="options" id="options">
-        <!-- <h3></h3> -->
+      <div class="options hide" id="options">
+        <h3 id="question-header"></h3>
         <div class="option-buttons" id="option-btns">
-          <!-- <button class="option"></button>
-          <button class="option"></button>
-          <button class="option"></button>
-          <button class="option"></button> -->
+          <button id="btn-1" class="option btn">
+          </button>
+          <button id="btn-2" class="option btn">
+          </button>
+          <button id="btn-3" class="option btn">
+          </button>
+          <button id="btn-4" class="option btn">
+          </button>
         </div>
         <!-- <div class="correct-wrong"></div> -->
       </div>
       <!-- Quiz Complete screen-->
-      <!-- <div class="quiz-complete hide">
+      <div class="hide quiz-complete" id="quiz-complete">
         <h3>All done!</h3>
         <p class="sub-heading">
-          Your final score is <span id="high-score"></span>
+          Your final score is:    <span id="high-score"></span>
         </p>
-        <form action="submit">
+        <form id="form-section" action="submit">
           <label for="initials">Enter Initials:</label>
           <input type="text" name="initials" maxlength="4" id="initials" />
           <button class="btn">Submit</button>
         </form>
-      </div> -->
+      </div>
     </main>
   </body>
 </html>

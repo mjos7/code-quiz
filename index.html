@@ -10,20 +10,26 @@
       content="A coding quiz to test out your developer skills."
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <script src="https://kit.fontawesome.com/c663089620.js" crossorigin="anonymous"></script>
+    <link rel="favicon icon" href="#" />
+    <script
+      src="https://kit.fontawesome.com/c663089620.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./assets/js/script.js" defer></script>
   </head>
   <body>
     <div class="container"></div>
     <header>
       <nav>
-        <a href="./high-scores.html"">View High Scores<i class="fas fa-crown"></i> </a>
+        <button id="hs-nav">
+          View High Scores<i class="fas fa-crown"></i>
+        </button>
         <div class="timer">Time: <span id="time">--</span></div>
       </nav>
     </header>
     <main>
       <!-- Start Page screen -->
-      <div class="start-page">
+      <div class="start-page" id="start-page">
         <h3 id="quiz-title">Coding Quiz Challenge</h3>
         <p class="sub-heading">
           Try to answer the following code-related questions within the time
@@ -36,14 +42,10 @@
       <div class="options hide" id="options">
         <h3 id="question-header"></h3>
         <div class="option-btns" id="option-btns">
-          <button id="btn-1" class="option btn">
-          </button>
-          <button id="btn-2" class="option btn">
-          </button>
-          <button id="btn-3" class="option btn">
-          </button>
-          <button id="btn-4" class="option btn">
-          </button>
+          <button id="btn-1" class="option btn"></button>
+          <button id="btn-2" class="option btn"></button>
+          <button id="btn-3" class="option btn"></button>
+          <button id="btn-4" class="option btn"></button>
         </div>
         <div id="correct-wrong" class="correct-wrong hide"></div>
       </div>
@@ -51,18 +53,36 @@
       <div class="hide quiz-complete" id="quiz-complete">
         <h3>All done!</h3>
         <p class="sub-heading">
-          Your final score is:    <span id="high-score"></span>
+          Your final score is: <span id="current-score"></span> out of 100!
         </p>
         <form id="form-section" action="submit">
           <label for="initials">Enter Initials:</label>
           <input type="text" name="initials" maxlength="4" id="initials" />
-          <button id="submit-score-btn" class="btn" onclick="window.location.href='./high-scores.html'">Submit</button>
+          <button id="submit-score-btn" class="btn">Submit</button>
         </form>
         <div id="correct-wrong-2" class="correct-wrong hide"></div>
+      </div>
+      <!-- High scores screen -->
+      <div class="high-scores hide" id="high-scores">
+        <h3>High scores</h3>
+        <ul id="hs-list">
+          <!-- <li></li>
+          <li></li>
+          <li></li>
+          <li></li> -->
+        </ul>
+        <div class="hs-btn-container">
+          <button class="btn" onclick="window.location.href='/index.html'">
+            Start Over
+          </button>
+          <button class="btn" id="clear-scores">Clear High Scores</button>
+        </div>
       </div>
     </main>
   </body>
 </html>
+
+<!-- onclick="window.location.href='./high-scores.html'" -->
 
 <!-- GIVEN I am taking a code quiz
 WHEN I click the start button

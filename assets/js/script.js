@@ -4,7 +4,7 @@ var time = 120;
 var count = 0;
 
 // DOM Elements
-var startPage = document.querySelector('.start-page');
+var startPage = document.getElementById('start-page');
 var startBtnEl = document.getElementById('start-btn');
 var timerEl = document.getElementById('time');
 var h3StartPageEl = document.getElementById('quiz-title');
@@ -17,9 +17,12 @@ var btn3El = document.getElementById('btn-3');
 var btn4El = document.getElementById('btn-4');
 var correctWrongEl = document.getElementById('correct-wrong');
 var quizCompleteEl = document.getElementById('quiz-complete');
-var highScoreEl = document.getElementById('high-score');
-var initialsEl = document.getElementById('initials');
+var currentScoreEl = document.getElementById('current-score');
 var submitScoreEl = document.getElementById('submit-score-btn');
+var highScoresEl = document.getElementById('high-scores');
+var hsListEl = document.getElementById('hs-list');
+var hsNavEl = document.getElementById('hs-nav');
+var clearScoresEl = document.getElementById('clear-scores');
 
 // Quiz Questions, Choices and Answers
 var questions = [
@@ -39,22 +42,19 @@ var questions = [
     a: 'all of the above',
   },
   {
-    q: 'String values must be enclosed within ________ when being assigned to variables.',
+    q: 'String values must be enclosed within _____when being assigned to variables.',
     c: ['commas', 'curly brackets', 'quotes', 'parenthesis'],
     a: 'quotes',
   },
   {
-    q: 'A very useful tool for used during development and debugging for printing content to the debugger is:',
+    q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
     c: ['JavaScript', 'terminal/bash', 'for loops', 'console.log'],
     a: 'console.log',
   },
 ];
 
 // Stores high scores
-var scores = {
-  initials: [],
-  highScore: [],
-};
+var scores = [];
 
 // Function that starts game (triggered by 'Start Quiz' button)
 
@@ -79,12 +79,10 @@ var showSection = function (sectionClass) {
 // Start timer
 function timer() {
   setInterval(function () {
-    if (time > 1) {
-      document.getElementById('time').innerHTML = time;
-    } else {
-      clearInterval(timer);
+    if (time === 0 || count === questions.length) {
       document.getElementById('time').innerHTML = 'Complete';
-      quizComplete();
+    } else {
+      document.getElementById('time').innerHTML = time;
     }
     time--;
   }, 1000);
@@ -133,47 +131,91 @@ const quizComplete = function () {
   showSection(quizCompleteEl);
   hideSection(optionsEl);
   showSection(correctWrongEl);
-  highScoreEl.textContent = score;
+  currentScoreEl.textContent = score;
+};
 
-  // store form submission in variable
-  // store info in local storage
-  // go to high scores screen
+var submitScores = function (initialsValue) {
+  scores.push({ initials: initialsValue, highScore: score });
+
+  // loop through savedTasks array
+  for (let i = 0; i < scores.length; i++) {
+    // pass each task object into the `createTaskEl()` function
+    var hsLI = document.createElement('li');
+    hsLI.textContent = `${scores[i].highScore} — ${scores[i].initials}`;
+    hsListEl.appendChild(hsLI);
+  }
+
+  saveScores();
+  displayScores();
 };
 
 const highScores = function () {
-  scores.highScore.push(score);
-  scores.initials.push(initialsEl.value);
-  // show highScores div with buttons
-  // if Replay button pressed, call startGame function
-  // if clear high scores button pressed, clear high scores
+  hideSection(quizCompleteEl);
+  quizCompleteEl.style.display = 'none !important';
+  showSection(highScoresEl);
+  var initialsValue = document.getElementById('initials').value;
+  submitScores(initialsValue);
 };
 
+// show highScores div with buttons
+// if Replay button pressed, call startGame function
+// if clear high scores button pressed, clear high scores
+
+// Local Storage
+
+var saveScores = function () {
+  localStorage.setItem('highscores', JSON.stringify(scores));
+};
+
+function displayScores() {
+  // Parsing the JSON string to an object
+  let storedScoreList = JSON.parse(localStorage.getItem('highScores'));
+}
+
+function clearScores() {
+  localStorage.clear();
+  hsListEl.remove();
+}
+
 // when start button is clicked
-startBtnEl.addEventListener('click', function () {
-  startGame();
-});
 
-// When choice is selected by pressing button
-btn1El.addEventListener('click', function () {
-  checkAnswer(btn1El.textContent);
-});
+if (window.location.href.indexOf('index.html') === 22) {
+  startBtnEl.addEventListener('click', function () {
+    startGame();
+  });
 
-btn2El.addEventListener('click', function () {
-  checkAnswer(btn2El.textContent);
-});
+  // When choice is selected by pressing button
+  btn1El.addEventListener('click', function () {
+    checkAnswer(btn1El.textContent);
+  });
 
-btn3El.addEventListener('click', function () {
-  checkAnswer(btn3El.textContent);
-});
+  btn2El.addEventListener('click', function () {
+    checkAnswer(btn2El.textContent);
+  });
 
-btn4El.addEventListener('click', function () {
-  checkAnswer(btn4El.textContent);
-});
+  btn3El.addEventListener('click', function () {
+    checkAnswer(btn3El.textContent);
+  });
 
-submitScoreEl.addEventListener('click', function () {
-  event.preventDefault();
-  highScores();
-});
+  btn4El.addEventListener('click', function () {
+    checkAnswer(btn4El.textContent);
+  });
 
+  submitScoreEl.addEventListener('click', function () {
+    event.preventDefault();
+    highScores();
+  });
+
+  hsNavEl.addEventListener('click', function () {
+    hideSection(startPage);
+    hideSection(quizCompleteEl);
+    showSection(highScoresEl);
+  });
+
+  clearScoresEl.addEventListener('click', function () {
+    clearScores();
+  });
+} else {
+}
 // displayOption.setAttribute('data-task-id', taskId);
 // optionsButtonsEl.appendChild(editButtonEl);

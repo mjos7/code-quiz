@@ -144,6 +144,7 @@ const submitHighScores = function () {
 };
 
 const displayHighScores = function () {
+  hideSection(startPage);
   hideSection(quizCompleteEl);
   showSection(highScoresEl);
 };
@@ -183,7 +184,6 @@ function clearScores() {
 // EVENT LISTENERS
 // when start button is clicked
 startBtnEl.addEventListener('click', function () {
-  console.log(startBtnEl);
   startGame();
 });
 
@@ -212,9 +212,6 @@ submitScoreEl.addEventListener('click', function (event) {
 
 // High Scores Nav button in top left hand corner
 hsNavEl.addEventListener('click', function (event) {
-  hideSection(startPage);
-  hideSection(quizCompleteEl);
-  displayHighScores();
   submitHighScores();
 });
 

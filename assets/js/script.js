@@ -102,7 +102,6 @@ var questionIndex = function (count) {
 };
 
 // Shows question within array, based on question index function
-
 var showQuestion = function (count) {
   questionHeaderEl.textContent = questions[count].q;
   btn1El.textContent = questions[count].c[0];
@@ -181,8 +180,8 @@ function clearScores() {
   hsListEl.remove();
 }
 
+// EVENT LISTENERS
 // when start button is clicked
-
 startBtnEl.addEventListener('click', function () {
   console.log(startBtnEl);
   startGame();
@@ -205,26 +204,26 @@ btn4El.addEventListener('click', function () {
   checkAnswer(btn4El.textContent);
 });
 
+// Submit scores button
 submitScoreEl.addEventListener('click', function (event) {
   event.preventDefault();
   submitHighScores();
 });
 
-hsNavEl.addEventListener('click', function () {
+// High Scores Nav button in top left hand corner
+hsNavEl.addEventListener('click', function (event) {
   hideSection(startPage);
   hideSection(quizCompleteEl);
-  event.preventDefault();
   displayHighScores();
   submitHighScores();
 });
 
+// Start over button
 startOverEl.addEventListener('click', function () {
   startOver();
 });
 
+// Clear Scores button
 clearScoresEl.addEventListener('click', function () {
   clearScores();
 });
-
-// displayOption.setAttribute('data-task-id', taskId);
-// optionsButtonsEl.appendChild(editButtonEl);

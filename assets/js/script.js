@@ -17,10 +17,12 @@ var btn2El = document.getElementById('btn-2');
 var btn3El = document.getElementById('btn-3');
 var btn4El = document.getElementById('btn-4');
 var correctWrongEl = document.getElementById('correct-wrong');
+var correctWrongEl2 = document.getElementById('correct-wrong-2');
 var quizCompleteEl = document.getElementById('quiz-complete');
 var currentScoreEl = document.getElementById('current-score');
 var submitScoreEl = document.getElementById('submit-score-btn');
 var highScoresEl = document.getElementById('high-scores');
+var navEl = document.getElementById('nav');
 var hsListEl = document.getElementById('hs-list');
 var hsNavEl = document.getElementById('hs-nav');
 var startOverEl = document.getElementById('start-over');
@@ -110,19 +112,21 @@ var showQuestion = function (count) {
 
 // Checks if the answer is correct / wrong
 const checkAnswer = function (btnText) {
-  if (count < questions.length + 1) {
+  if (count < questions.length) {
     if (btnText === questions[count].a) {
       count++;
       score += 20;
       questionIndex(count);
       showSection(correctWrongEl);
       correctWrongEl.textContent = 'Correct';
+      correctWrongEl2.textContent = 'Correct';
     } else {
       count++;
       time -= 10;
       questionIndex(count);
       showSection(correctWrongEl);
       correctWrongEl.textContent = 'Wrong';
+      correctWrongEl2.textContent = 'Wrong';
     }
   }
 };
@@ -131,27 +135,42 @@ const checkAnswer = function (btnText) {
 const quizComplete = function () {
   showSection(quizCompleteEl);
   hideSection(optionsEl);
-  showSection(correctWrongEl);
   currentScoreEl.textContent = score;
+  showSection(correctWrongEl2);
+  checkAnswer(
+    btn1El.textContent ||
+      btn2El.textContent ||
+      btn3El.textContent ||
+      btn4El.textContent
+  );
 };
 
 // Display high scores screen
 const displayHighScores = function () {
   hideSection(startPage);
   hideSection(quizCompleteEl);
+  hideSection(hsNavEl);
   showSection(highScoresEl);
+  navEl.style.justifyContent = 'flex-end';
 };
 
 // Saves high score function
 var saveHighScores = function () {
   // get the initials
   var initialsValue = document.getElementById('initials').value;
-  // get the high scores from local storage and save them to a variable
-  var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
-  // push a new score to the variable containing the high scores from local storage
-  scores.push({ initials: initialsValue, highScore: score });
-  // send the high scores to local storage
-  localStorage.setItem('submitHighScores', JSON.stringify(scores));
+
+  // return if initials are empty
+  if (initialsValue == '') {
+    alert('Please enter your initials!');
+    return;
+  } else {
+    // get the high scores from local storage and save them to a variable
+    var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
+    // push a new score to the variable containing the high scores from local storage
+    scores.push({ initials: initialsValue, highScore: score });
+    // send the high scores to local storage
+    localStorage.setItem('submitHighScores', JSON.stringify(scores));
+  }
 };
 
 // Prints high score function

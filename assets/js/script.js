@@ -77,7 +77,7 @@ const startGame = function () {
 
 // Go to start page
 const startOver = function () {
-  window.location.href = '/index.html';
+  window.location.href = './code-quiz/';
 };
 
 // Hide section by class

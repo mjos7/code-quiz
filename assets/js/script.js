@@ -137,16 +137,15 @@ const quizComplete = function () {
   currentScoreEl.textContent = score;
 };
 
-const submitHighScores = function () {
-  displayHighScores();
-  var initialsValue = document.getElementById('initials').value;
-  sortScores(initialsValue);
-};
-
 const displayHighScores = function () {
   hideSection(startPage);
   hideSection(quizCompleteEl);
   showSection(highScoresEl);
+};
+
+const submitHighScores = function () {
+  var initialsValue = document.getElementById('initials').value;
+  sortScores(initialsValue);
 };
 
 var sortScores = function (initialsValue) {
@@ -161,9 +160,7 @@ var sortScores = function (initialsValue) {
     scores.pop();
   }
 
-  // loop through savedTasks array
   for (let i = 0; i < scores.length; i++) {
-    // pass each task object into the `createTaskEl()` function
     var hsLI = document.createElement('li');
     hsLI.textContent = `${scores[i].highScore} — ${scores[i].initials}`;
     hsListEl.appendChild(hsLI);
@@ -208,11 +205,13 @@ btn4El.addEventListener('click', function () {
 submitScoreEl.addEventListener('click', function (event) {
   event.preventDefault();
   submitHighScores();
+  displayHighScores();
 });
 
 // High Scores Nav button in top left hand corner
 hsNavEl.addEventListener('click', function (event) {
   submitHighScores();
+  displayHighScores();
 });
 
 // Start over button

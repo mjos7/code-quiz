@@ -56,17 +56,15 @@ var questions = [
 ];
 
 // Function that starts game (triggered by 'Start Quiz' button)
-
 const startGame = function () {
-  // hide start page div
   hideSection(startPage);
   showSection(optionsEl);
   timer();
   questionIndex(count);
 };
 
+// Go to start page
 const startOver = function () {
-  // show start page div
   window.location.href = '/index.html';
 };
 
@@ -111,9 +109,8 @@ var showQuestion = function (count) {
 };
 
 // Checks if the answer is correct / wrong
-
 const checkAnswer = function (btnText) {
-  if (count < questions.length) {
+  if (count < questions.length + 1) {
     if (btnText === questions[count].a) {
       count++;
       score += 20;
@@ -130,6 +127,7 @@ const checkAnswer = function (btnText) {
   }
 };
 
+// Quiz complete (All done) page
 const quizComplete = function () {
   showSection(quizCompleteEl);
   hideSection(optionsEl);
@@ -137,49 +135,51 @@ const quizComplete = function () {
   currentScoreEl.textContent = score;
 };
 
+// Display high scores screen
 const displayHighScores = function () {
   hideSection(startPage);
   hideSection(quizCompleteEl);
   showSection(highScoresEl);
 };
 
-const submitHighScores = function () {
+// Saves high score function
+var saveHighScores = function () {
+  // get the initials
   var initialsValue = document.getElementById('initials').value;
-  sortScores(initialsValue);
+  // get the high scores from local storage and save them to a variable
+  var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
+  // push a new score to the variable containing the high scores from local storage
+  scores.push({ initials: initialsValue, highScore: score });
+  // send the high scores to local storage
+  localStorage.setItem('submitHighScores', JSON.stringify(scores));
 };
 
-var sortScores = function (initialsValue) {
-  if (scores.length <= 5) {
-    scores.push({ initials: initialsValue, highScore: score });
-    scores.sort(function (b, a) {
-      return a.highScore - b.highScore;
-    });
-  } else {
-    if (scores.length.highScore > score) {
-    }
-    scores.pop();
-  }
+// Prints high score function
+var printHighScores = function () {
+  // get the high scores` from local storage
+  var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
+  // sort the scores
 
+  scores.sort(function (b, a) {
+    return a.highScore - b.highScore;
+  });
+
+  // loop through the high scores and create the li’s and append them
   for (let i = 0; i < scores.length; i++) {
     var hsLI = document.createElement('li');
     hsLI.textContent = `${scores[i].highScore} — ${scores[i].initials}`;
     hsListEl.appendChild(hsLI);
   }
-
-  saveScores(scores);
 };
 
-var saveScores = function (s) {
-  localStorage.setItem('submitHighScores', JSON.stringify(s));
-};
-
+// Clears scores from local storage and UI
 function clearScores() {
   localStorage.clear();
   hsListEl.remove();
 }
 
 // EVENT LISTENERS
-// when start button is clicked
+// When start button is clicked
 startBtnEl.addEventListener('click', function () {
   startGame();
 });
@@ -204,14 +204,15 @@ btn4El.addEventListener('click', function () {
 // Submit scores button
 submitScoreEl.addEventListener('click', function (event) {
   event.preventDefault();
-  submitHighScores();
   displayHighScores();
+  saveHighScores();
+  printHighScores();
 });
 
 // High Scores Nav button in top left hand corner
 hsNavEl.addEventListener('click', function (event) {
-  submitHighScores();
   displayHighScores();
+  printHighScores();
 });
 
 // Start over button

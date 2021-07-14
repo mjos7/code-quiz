@@ -3,8 +3,8 @@
 # General
 
 Git Page - Deployed Application
-https://mjos7.github.io/coding-quiz-challenge
-
+https://mjos7.github.io/code-quiz/
+gi
 Screenshot of Mockup
 ![Screenshot of Mockup](.assets/images/04-web-apis-homework-demo.gif)
 

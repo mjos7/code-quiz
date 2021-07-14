@@ -224,3 +224,67 @@ h3 {
   margin: 20px 15px 0 0;
   display: inline-block;
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    margin: 20px 20px 65px;
+  }
+
+  nav button {
+    margin-bottom: 20px;
+  }
+
+  .options h3 {
+    text-align: center;
+  }
+
+  main {
+    text-align: center;
+    width: 83%;
+  }
+
+  h3 {
+    font-size: 35px;
+    line-height: 1.2em;
+  }
+
+  #quiz-title {
+    font-size: 45px;
+  }
+
+  .sub-heading {
+    font-size: 25px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #form-section {
+    flex-direction: column;
+  }
+
+  .quiz-complete h3,
+  .quiz-complete p {
+    text-align: center;
+  }
+
+  .quiz-complete label,
+  .quiz-complete input {
+    font-size: 30px;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
+
+  .high-scores h3,
+  .high-scores p {
+    text-align: center;
+  }
+
+  .hs-btn-container {
+    width: 100%;
+  }
+}

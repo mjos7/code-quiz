@@ -1,6 +1,6 @@
 // Global Variables
 var score = 0;
-var time = 10;
+var time = 120;
 var count = 0;
 var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
 

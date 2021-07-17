@@ -1,6 +1,6 @@
 // Global Variables
 var score = 0;
-var time = 120;
+var time = 10;
 var count = 0;
 var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
 
@@ -92,11 +92,13 @@ var showSection = function (sectionClass) {
 
 // Start timer
 function timer() {
-  setInterval(function () {
-    if (time === 0 || count === questions.length) {
-      document.getElementById('time').innerHTML = 'Complete';
+  var intervalID = setInterval(function () {
+    if (time <= 0 || count === questions.length) {
+      timerEl.innerHTML = 'Complete';
+      quizComplete();
+      clearInterval(intervalID);
     } else {
-      document.getElementById('time').innerHTML = time;
+      timerEl.innerHTML = time;
     }
     time--;
   }, 1000);
@@ -141,7 +143,7 @@ const checkAnswer = function (btnText) {
   }
 };
 
-// Quiz complete (All done) page
+// Quiz complete (All done) screen
 const quizComplete = function () {
   showSection(quizCompleteEl);
   hideSection(optionsEl);
@@ -165,22 +167,13 @@ const displayHighScores = function () {
 };
 
 // Saves high score function
-var saveHighScores = function () {
-  // get the initials
-  var initialsValue = document.getElementById('initials').value;
-
-  // return if initials are empty
-  if (initialsValue == '') {
-    alert('Please enter your initials!');
-    return;
-  } else {
-    // get the high scores from local storage and save them to a variable
-    var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
-    // push a new score to the variable containing the high scores from local storage
-    scores.push({ initials: initialsValue, highScore: score });
-    // send the high scores to local storage
-    localStorage.setItem('submitHighScores', JSON.stringify(scores));
-  }
+var saveHighScores = function (initialsValue) {
+  // get the high scores from local storage and save them to a variable
+  var scores = JSON.parse(localStorage.getItem('submitHighScores')) || [];
+  // push a new score to the variable containing the high scores from local storage
+  scores.push({ initials: initialsValue, highScore: score });
+  // send the high scores to local storage
+  localStorage.setItem('submitHighScores', JSON.stringify(scores));
 };
 
 // Prints high score function
@@ -233,9 +226,19 @@ btn4El.addEventListener('click', function () {
 // Submit scores button
 submitScoreEl.addEventListener('click', function (event) {
   event.preventDefault();
-  displayHighScores();
-  saveHighScores();
-  printHighScores();
+
+  // get the initials
+  var initialsValue = document.getElementById('initials').value;
+
+  // return if initials are empty
+  if (initialsValue == '') {
+    alert('Please enter your initials!');
+    return;
+  } else {
+    saveHighScores(initialsValue);
+    displayHighScores();
+    printHighScores();
+  }
 });
 
 // High Scores Nav button in top left hand corner
